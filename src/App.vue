@@ -1,27 +1,41 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <RecycleWidget
+    :id="1"
+    type="plastic bottles"
+    :amount="100"
+    action="collects"
+    selectedColor="blue"
+    active
+    linked
+  />
+  <RecycleWidget
+    :id="2"
+    type="trees"
+    :amount="10"
+    action="plants"
+    selectedColor="green"
+    active
+    linked
+  />
+  <RecycleWidget
+    :id="3"
+    type="carbon"
+    :amount="100"
+    action="offsets"
+    selectedColor="beige"
+    active
+    linked
+  />
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import HelloWorld from "./components/HelloWorld.vue";
+import RecycleWidget from "./components/RecycleWidget.vue";
 
 @Options({
   components: {
-    HelloWorld,
+    RecycleWidget,
   },
 })
 export default class App extends Vue {}
 </script>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
