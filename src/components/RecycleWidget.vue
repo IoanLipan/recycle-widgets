@@ -1,6 +1,6 @@
 <template>
   <article>
-    <header>
+    <header class="flex w-24 bg-blue-500">
       <img src="@/assets/greensparkLogo.svg" />
     </header>
   </article>
