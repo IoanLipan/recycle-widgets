@@ -1,7 +1,7 @@
 <template>
   <article class="flex flex-col gap-4 items-center w-56">
     <div
-      class="absolute max-w-60 top-[30%]"
+      class="absolute z-20 max-w-60 top-[30%]"
       v-if="showTooltip"
       @mouseenter="cancelTooltipHide"
       @mouseleave="hideTooltipDelayed"
