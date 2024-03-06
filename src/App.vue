@@ -12,6 +12,8 @@
           :amount="widget.amount"
           :action="widget.action"
           :defaultColor="widget.defaultColor"
+          :defaultLinked="widget.defaultLinked"
+          :defaultActive="widget.defaultActive"
         />
       </div>
     </div>
@@ -35,6 +37,8 @@ export default {
           amount: 100,
           action: "collects",
           defaultColor: "blue",
+          defaultLinked: true,
+          defaultActive: true,
         },
         {
           id: 2,
@@ -42,6 +46,8 @@ export default {
           amount: 10,
           action: "plants",
           defaultColor: "green",
+          defaultLinked: false,
+          defaultActive: false,
         },
         {
           id: 3,
@@ -49,6 +55,8 @@ export default {
           amount: 100,
           action: "offsets",
           defaultColor: "beige",
+          defaultLinked: true,
+          defaultActive: true,
         },
       ],
     };
