@@ -50,12 +50,7 @@
           class="flex p-2 hover:bg-opacity-30 hover:bg-custom-green rounded-full relative"
           @click="toggleCheckbox"
         >
-          <input
-            class="opacity-0 absolute"
-            type="checkbox"
-            v-model="linked"
-            @change="handleCheckboxChange"
-          />
+          <input class="opacity-0 absolute" type="checkbox" v-model="linked" />
           <div
             class="h-4 w-4 border-2 rounded-sm flex justify-center items-center"
             :style="checkboxStyle"
@@ -81,13 +76,25 @@
       <div class="flex justify-between items-center">
         <p>Badge colour</p>
         <div class="flex gap-1 items-center">
-          <span
-            v-for="color in colorsAvailable"
-            :key="color"
-            class="flex h-4 w-4 border-gray-100 border-[1px] hover:border-2"
-            :class="translateColor(color).bg"
-            @click="selectColor(color)"
-          />
+          <div class="flex gap-1 items-center">
+            <div
+              v-for="color in colorsAvailable"
+              :key="color"
+              class="relative z-10 hover:bg-opacity-50 hover:bg-gray-500 transition duration-300"
+              @click="selectColor(color)"
+            >
+              <span
+                class="flex h-4 w-4 border-gray-100"
+                :class="[
+                  translateColor(color).bg,
+                  { 'border-[1px] border-gray-400': selectedColor === color },
+                ]"
+              />
+              <div
+                class="absolute top-0 left-0 w-full h-full opacity-0 hover:opacity-30 bg-white transition duration-300"
+              ></div>
+            </div>
+          </div>
         </div>
       </div>
       <div>Activate badge</div>
@@ -154,9 +161,6 @@ export default defineComponent({
   methods: {
     toggleCheckbox() {
       this.linked = !this.linked;
-    },
-    handleCheckboxChange() {
-      console.log(this.linked);
     },
     translateColor(color: string) {
       const colorMap = {
