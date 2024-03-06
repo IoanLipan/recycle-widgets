@@ -97,7 +97,20 @@
           </div>
         </div>
       </div>
-      <div>Activate badge</div>
+      <div class="flex justify-between items-center">
+        <p>Activate badge</p>
+        <div
+          class="relative cursor-pointer w-[42px] h-[22px] rounded-full border-[1px] border-custom-green border-opacity-25"
+          :class="active ? 'bg-custom-green' : 'bg-gray-100'"
+          @click="toggleBadge"
+          @update:active="toggleBadge"
+        >
+          <div
+            class="absolute w-5 h-5 scale-110 bg-white rounded-full transition-all duration-300 border-[1px] border-gray-100"
+            :class="{ 'left-5 border-custom-green': active, 'left-0': !active }"
+          ></div>
+        </div>
+      </div>
     </div>
   </article>
 </template>
@@ -128,7 +141,7 @@ export default defineComponent({
       type: String,
       default: "offsets",
     },
-    active: {
+    defaultActive: {
       type: Boolean,
       default: false,
     },
@@ -146,6 +159,7 @@ export default defineComponent({
       colorsAvailable: ["blue", "green", "beige", "white", "black"],
       selectedColor: this.defaultColor,
       linked: this.defaultLinked,
+      active: this.defaultActive,
       showTooltip: false,
       tooltipTimeoutId: 0,
     };
@@ -157,10 +171,20 @@ export default defineComponent({
         borderColor: this.linked ? "#3B755F" : "#000",
       };
     },
+    badgeStyle(): { backgroundColor: string; borderColor: string } {
+      return {
+        backgroundColor: this.active ? "#3B755F" : "transparent",
+        borderColor: this.active ? "#3B755F" : "#000",
+      };
+    },
   },
   methods: {
     toggleCheckbox() {
       this.linked = !this.linked;
+    },
+    toggleBadge() {
+      this.active = !this.active;
+      this.$emit("update:active", this.active); // Emit changes if needed
     },
     translateColor(color: string) {
       const colorMap = {
