@@ -91,7 +91,7 @@
                 ]"
               />
               <div
-                class="absolute top-0 left-0 w-full h-full opacity-0 hover:opacity-30 bg-white transition duration-300"
+                class="absolute top-0 left-0 w-full h-full opacity-0 hover:opacity-30 bg-gray-200 transition duration-300"
               ></div>
             </div>
           </div>
@@ -100,14 +100,19 @@
       <div class="flex justify-between items-center">
         <p>Activate badge</p>
         <div
-          class="relative cursor-pointer w-[42px] h-[22px] rounded-full border-[1px] border-custom-green border-opacity-25"
+          class="group relative cursor-pointer w-[42px] h-[22px] rounded-full border-[1px] border-custom-green border-opacity-25"
           :class="active ? 'bg-custom-green' : 'bg-gray-100'"
           @click="toggleBadge"
           @update:active="toggleBadge"
         >
           <div
-            class="absolute w-5 h-5 scale-110 bg-white rounded-full transition-all duration-300 border-[1px] border-gray-100"
+            class="absolute z-10 w-5 h-5 scale-110 bg-white rounded-full transition-all duration-300 border-[1px] border-gray-100"
             :class="{ 'left-5 border-custom-green': active, 'left-0': !active }"
+          ></div>
+
+          <div
+            class="hidden group-hover:block absolute w-7 h-7 bg-opacity-40 bg-custom-green rounded-full transition-all duration-300 -top-1"
+            :class="{ 'left-4': active, '-left-1': !active }"
           ></div>
         </div>
       </div>
