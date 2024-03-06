@@ -16,7 +16,21 @@
       </div>
     </header>
     <div class="flex text-sm flex-col gap-2 w-full text-custom-green">
-      <div>Link to Public Profile</div>
+      <div class="flex justify-between items-center">
+        <h4 class="flex gap-1">
+          Link to Public Profile <img class="-mt-2" src="@/assets/info.svg" />
+        </h4>
+        <div
+          class="flex p-2 hover:bg-opacity-30 hover:bg-custom-green rounded-full"
+        >
+          <input
+            class="h-4 w-4"
+            style=""
+            type="checkbox"
+            v-model="linked"
+          />
+        </div>
+      </div>
       <div class="flex justify-between items-center">
         <p>Badge colour</p>
         <div class="flex gap-1 items-center">
@@ -29,6 +43,7 @@
           />
         </div>
       </div>
+      <div>Activate badge</div>
     </div>
   </article>
 </template>
@@ -63,7 +78,7 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
-    linked: {
+    defaultLinked: {
       type: Boolean,
       default: false,
     },
@@ -76,6 +91,7 @@ export default defineComponent({
     return {
       colorsAvailable: ["blue", "green", "beige", "white", "black"],
       selectedColor: this.defaultColor,
+      linked: this.defaultLinked,
     };
   },
   methods: {
