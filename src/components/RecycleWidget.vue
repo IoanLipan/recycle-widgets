@@ -21,14 +21,35 @@
           Link to Public Profile <img class="-mt-2" src="@/assets/info.svg" />
         </h4>
         <div
-          class="flex p-2 hover:bg-opacity-30 hover:bg-custom-green rounded-full"
+          class="flex p-2 hover:bg-opacity-30 hover:bg-custom-green rounded-full relative"
+          @click="toggleCheckbox"
         >
           <input
-            class="h-4 w-4"
-            style=""
+            class="opacity-0 absolute"
             type="checkbox"
             v-model="linked"
+            @change="handleCheckboxChange"
           />
+          <div
+            class="h-4 w-4 border-2 rounded-sm flex justify-center items-center"
+            :style="checkboxStyle"
+          >
+            <svg
+              v-show="linked"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              class="w-3 h-3 scale-150 text-white"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.5"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </div>
         </div>
       </div>
       <div class="flex justify-between items-center">
@@ -94,7 +115,21 @@ export default defineComponent({
       linked: this.defaultLinked,
     };
   },
+  computed: {
+    checkboxStyle(): { backgroundColor: string; borderColor: string } {
+      return {
+        backgroundColor: this.linked ? "#3B755F" : "transparent",
+        borderColor: this.linked ? "#3B755F" : "#000",
+      };
+    },
+  },
   methods: {
+    toggleCheckbox() {
+      this.linked = !this.linked;
+    },
+    handleCheckboxChange() {
+      console.log(this.linked);
+    },
     translateColor(color: string) {
       const colorMap = {
         white: { bg: "bg-white", text: "text-black", svgFill: "#000000" },
