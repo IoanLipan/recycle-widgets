@@ -3,13 +3,13 @@
     <div class="flex flex-col p-10 rounded-xl shadow-2xl gap-2">
       <h1 class="text-3xl">Per products widgets</h1>
       <hr class="w-full bg-grey-800 h-4" />
-      <div class="flex">
+      <div class="flex gap-4">
         <RecycleWidget
           :id="1"
           type="plastic bottles"
           :amount="100"
           action="collects"
-          selectedColor="blue"
+          defaultColor="blue"
           active
           linked
         />
@@ -18,7 +18,7 @@
           type="trees"
           :amount="10"
           action="plants"
-          selectedColor="green"
+          defaultColor="green"
           active
           linked
         />
@@ -27,7 +27,7 @@
           type="carbon"
           :amount="100"
           action="offsets"
-          selectedColor="beige"
+          defaultColor="beige"
           active
           linked
         />

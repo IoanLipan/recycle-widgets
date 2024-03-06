@@ -1,20 +1,22 @@
 <template>
-  <article class="flex flex-col items-center w-56">
+  <article class="flex flex-col gap-4 items-center w-56">
     <header
       :class="[
         translateColor(selectedColor).bg,
         translateColor(selectedColor).text,
       ]"
-      class="flex items-center h-16 p-4 w-full gap-2 rounded-lg"
+      class="flex items-center h-16 p-3 w-full gap-3 rounded-lg"
     >
-      <img src="@/assets/greensparkLogo.svg" />
+      <GreensparkLogo :fillColor="translateColor(selectedColor).svgFill" />
       <div>
-        <span class="text-sm">This product {{ action }}</span>
-        <br />
-        <span>{{ amount }} {{ type }}</span>
+        <h3 class="text-sm font-light">This product {{ action }}</h3>
+        <h2 class="text-lg font-medium">
+          {{ amount }}{{ type === "carbon" ? "kgs of carbon" : " " + type }}
+        </h2>
       </div>
     </header>
-    <div class="w-full">
+    <div class="flex text-sm flex-col gap-2 w-full text-custom-green">
+      <div>Link to Public Profile</div>
       <div class="flex justify-between items-center">
         <p>Badge colour</p>
         <div class="flex gap-1 items-center">
@@ -33,9 +35,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import GreensparkLogo from "./GreensparkLogo.vue";
 
 export default defineComponent({
   name: "RecycleWidget",
+  components: {
+    GreensparkLogo,
+  },
   props: {
     id: {
       type: Number,
@@ -61,21 +67,33 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    defaultColor: {
+      type: String,
+      default: "blue",
+    },
   },
   data() {
     return {
       colorsAvailable: ["blue", "green", "beige", "white", "black"],
-      selectedColor: "blue",
+      selectedColor: this.defaultColor,
     };
   },
   methods: {
     translateColor(color: string) {
       const colorMap = {
-        white: { bg: "bg-white", text: "text-black" },
-        black: { bg: "bg-black", text: "text-white" },
-        blue: { bg: "bg-custom-blue", text: "text-white" },
-        green: { bg: "bg-custom-green", text: "text-white" },
-        beige: { bg: "bg-custom-beige", text: "text-custom-green" },
+        white: { bg: "bg-white", text: "text-black", svgFill: "#000000" },
+        black: { bg: "bg-black", text: "text-white", svgFill: "#FFFFFF" },
+        blue: { bg: "bg-custom-blue", text: "text-white", svgFill: "#FFFFFF" },
+        green: {
+          bg: "bg-custom-green",
+          text: "text-white",
+          svgFill: "#FFFFFF",
+        },
+        beige: {
+          bg: "bg-custom-beige",
+          text: "text-custom-green",
+          svgFill: "#3B755F",
+        },
       };
       //eslint-disable-next-line
       // @ts-ignore
