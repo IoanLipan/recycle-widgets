@@ -7,7 +7,13 @@ module.exports = {
       fontFamily: {
         sans: ["Cabin", "ui-sans-serif", "system-ui"],
       },
+      colors: {
+        'custom-blue': '#2F398C',
+        'custom-green': '#3B755F',
+        'custom-beige': '#F2EBDB',
+      },
     },
   },
+  mode: 'jit',
   plugins: [],
 };

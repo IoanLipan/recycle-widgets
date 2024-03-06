@@ -1,8 +1,11 @@
 <template>
   <article class="flex flex-col items-center w-56">
     <header
-      :class="translateColor(selectedColor)"
-      class="flex items-center h-16 p-4 w-full gap-2 rounded-lg bg-blue-500"
+      :class="[
+        translateColor(selectedColor).bg,
+        translateColor(selectedColor).text,
+      ]"
+      class="flex items-center h-16 p-4 w-full gap-2 rounded-lg"
     >
       <img src="@/assets/greensparkLogo.svg" />
       <div>
@@ -19,7 +22,7 @@
             v-for="color in colorsAvailable"
             :key="color"
             class="flex h-4 w-4 border-gray-100 border-[1px] hover:border-2"
-            :class="translateColor(color)"
+            :class="translateColor(color).bg"
             @click="selectColor(color)"
           />
         </div>
@@ -61,25 +64,22 @@ export default defineComponent({
   },
   data() {
     return {
-      colorsAvailable: ["white", "black", "blue", "green", "beige"],
+      colorsAvailable: ["blue", "green", "beige", "white", "black"],
       selectedColor: "blue",
     };
   },
-  computed: {},
   methods: {
-    translateColor(color: string | undefined) {
-      switch (color) {
-        case "white":
-          return "bg-white";
-        case "black":
-          return "bg-black";
-        case "blue":
-          return "bg-blue-500";
-        case "green":
-          return "bg-green-700";
-        case "beige":
-          return "bg-amber-100 text-green-800";
-      }
+    translateColor(color: string) {
+      const colorMap = {
+        white: { bg: "bg-white", text: "text-black" },
+        black: { bg: "bg-black", text: "text-white" },
+        blue: { bg: "bg-custom-blue", text: "text-white" },
+        green: { bg: "bg-custom-green", text: "text-white" },
+        beige: { bg: "bg-custom-beige", text: "text-custom-green" },
+      };
+      //eslint-disable-next-line
+      // @ts-ignore
+      return colorMap[color] || colorMap["blue"];
     },
     selectColor(color: string) {
       this.selectedColor = color;
