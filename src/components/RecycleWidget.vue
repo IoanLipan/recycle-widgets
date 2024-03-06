@@ -1,5 +1,22 @@
 <template>
   <article class="flex flex-col gap-4 items-center w-56">
+    <div
+      class="absolute max-w-60 top-[30%]"
+      v-if="showTooltip"
+      @mouseenter="cancelTooltipHide"
+      @mouseleave="hideTooltipDelayed"
+    >
+      <div class="p-4 text-center bg-slate-50 shadow-2xl text-black rounded-md">
+        <p>
+          This widget links directly to your public profile so that you can
+          easily share your impact with your customers. Turn it off here if you
+          do not want the badge to link to it.
+        </p>
+        <button v-if="linked" class="text-custom-green pt-2">
+          View Public Profile
+        </button>
+      </div>
+    </div>
     <header
       :class="[
         translateColor(selectedColor).bg,
@@ -15,10 +32,19 @@
         </h2>
       </div>
     </header>
-    <div class="flex text-sm flex-col gap-2 w-full text-custom-green">
+    <div class="flex text-sm flex-col gap-1 w-full text-custom-green">
       <div class="flex justify-between items-center">
         <h4 class="flex gap-1">
-          Link to Public Profile <img class="-mt-2" src="@/assets/info.svg" />
+          Link to Public Profile
+          <img
+            class="-mt-2 cursor-pointer"
+            src="@/assets/info.svg"
+            @mouseenter="
+              cancelTooltipHide();
+              showTooltip = true;
+            "
+            @mouseleave="hideTooltipDelayed"
+          />
         </h4>
         <div
           class="flex p-2 hover:bg-opacity-30 hover:bg-custom-green rounded-full relative"
@@ -113,6 +139,8 @@ export default defineComponent({
       colorsAvailable: ["blue", "green", "beige", "white", "black"],
       selectedColor: this.defaultColor,
       linked: this.defaultLinked,
+      showTooltip: false,
+      tooltipTimeoutId: 0,
     };
   },
   computed: {
@@ -152,6 +180,24 @@ export default defineComponent({
     },
     selectColor(color: string) {
       this.selectedColor = color;
+    },
+    showTooltipDelayed() {
+      this.tooltipTimeoutId = setTimeout(() => {
+        this.showTooltip = true;
+      }, 300);
+    },
+    hideTooltipDelayed() {
+      if (this.tooltipTimeoutId) {
+        clearTimeout(this.tooltipTimeoutId);
+      }
+      this.tooltipTimeoutId = setTimeout(() => {
+        this.showTooltip = false;
+      }, 300);
+    },
+    cancelTooltipHide() {
+      if (this.tooltipTimeoutId) {
+        clearTimeout(this.tooltipTimeoutId);
+      }
     },
   },
 });
