@@ -97,7 +97,7 @@
           </div>
         </div>
       </div>
-      <div class="flex justify-between items-center">
+      <div class="flex justify-between items-center pt-1">
         <p>Activate badge</p>
         <div
           class="group relative cursor-pointer w-[42px] h-[22px] rounded-full border-[1px] border-custom-green border-opacity-25"
@@ -189,7 +189,7 @@ export default defineComponent({
     },
     toggleBadge() {
       this.active = !this.active;
-      this.$emit("update:active", this.active); // Emit changes if needed
+      this.$emit("update:active", this.active);
     },
     translateColor(color: string) {
       const colorMap = {
