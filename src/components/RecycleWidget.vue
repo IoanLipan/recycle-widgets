@@ -102,8 +102,7 @@
         <div
           class="group relative cursor-pointer w-[42px] h-[22px] rounded-full border-[1px] border-custom-green border-opacity-25"
           :class="active ? 'bg-custom-green' : 'bg-gray-100'"
-          @click="toggleBadge"
-          @update:active="toggleBadge"
+          @click="toggleWidget"
         >
           <div
             class="absolute z-10 w-5 h-5 scale-110 bg-white rounded-full transition-all duration-300 border-[1px] border-gray-100"
@@ -187,9 +186,12 @@ export default defineComponent({
     toggleCheckbox() {
       this.linked = !this.linked;
     },
-    toggleBadge() {
+    deactivateWidget() {
+      this.active = false;
+    },
+    toggleWidget() {
       this.active = !this.active;
-      this.$emit("update:active", this.active);
+      this.$emit("toggle", this.id);
     },
     translateColor(color: string) {
       const colorMap = {
